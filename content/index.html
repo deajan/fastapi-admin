@@ -1,0 +1,899 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Fast Admin Dashboard based on fastapi and tortoise-orm">
+      
+      
+      
+        <meta name="author" content="long2ice">
+      
+      
+        <link rel="canonical" href="https://github.com/long2ice/fastapi-admin/content/">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.7">
+    
+    
+      
+        <title>Content - FastAPI Admin</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#builtin-auth-and-permissions-control" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://github.com/long2ice/fastapi-admin" title="FastAPI Admin" class="md-header-nav__button md-logo" aria-label="FastAPI Admin">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            FastAPI Admin
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Content
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/long2ice/fastapi-admin/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    long2ice/fastapi-admin
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://github.com/long2ice/fastapi-admin" title="FastAPI Admin" class="md-nav__button md-logo" aria-label="FastAPI Admin">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    FastAPI Admin
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/long2ice/fastapi-admin/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    long2ice/fastapi-admin
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        FastAPI ADMIN
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Content
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Content
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#builtin-auth-and-permissions-control" class="md-nav__link">
+    Builtin Auth And Permissions Control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-login" class="md-nav__link">
+    Custom Login
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum-support" class="md-nav__link">
+    Enum Support
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help-text" class="md-nav__link">
+    Help Text
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foreignkeyfield-support" class="md-nav__link">
+    ForeignKeyField Support
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manytomanyfield-support" class="md-nav__link">
+    ManyToManyField Support
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jsonfield-render" class="md-nav__link">
+    JSONField Render
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-fields" class="md-nav__link">
+    Search Fields
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xlsx-export" class="md-nav__link">
+    Xlsx Export
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bulk-actions" class="md-nav__link">
+    Bulk Actions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-menus" class="md-nav__link">
+    Default Menus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-menus" class="md-nav__link">
+    Custom Menus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-variant" class="md-nav__link">
+    Table Variant
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#admin-log" class="md-nav__link">
+    Admin log
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import-from-excel" class="md-nav__link">
+    Import from excel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-filters" class="md-nav__link">
+    Custom filters
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#builtin-auth-and-permissions-control" class="md-nav__link">
+    Builtin Auth And Permissions Control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-login" class="md-nav__link">
+    Custom Login
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum-support" class="md-nav__link">
+    Enum Support
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help-text" class="md-nav__link">
+    Help Text
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foreignkeyfield-support" class="md-nav__link">
+    ForeignKeyField Support
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manytomanyfield-support" class="md-nav__link">
+    ManyToManyField Support
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jsonfield-render" class="md-nav__link">
+    JSONField Render
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-fields" class="md-nav__link">
+    Search Fields
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xlsx-export" class="md-nav__link">
+    Xlsx Export
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bulk-actions" class="md-nav__link">
+    Bulk Actions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-menus" class="md-nav__link">
+    Default Menus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-menus" class="md-nav__link">
+    Custom Menus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-variant" class="md-nav__link">
+    Table Variant
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#admin-log" class="md-nav__link">
+    Admin log
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import-from-excel" class="md-nav__link">
+    Import from excel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-filters" class="md-nav__link">
+    Custom filters
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/long2ice/fastapi-admin/edit/master/docs/content.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Content</h1>
+                
+                <h2 id="builtin-auth-and-permissions-control">Builtin Auth And Permissions Control</h2>
+<p>You should inherit <code>fastapi_admin.models.AbstractUser</code>,<code>fastapi_admin.models.AbstractPermission</code>,<code>fastapi_admin.models.AbstractRole</code> and add extra fields.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">fastapi_admin.models</span> <span class="kn">import</span> <span class="n">AbstractUser</span><span class="p">,</span> <span class="n">AbstractPermission</span><span class="p">,</span> <span class="n">AbstractRole</span>
+
+<span class="k">class</span> <span class="nc">AdminUser</span><span class="p">(</span><span class="n">AbstractUser</span><span class="p">):</span>
+    <span class="n">is_active</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Is Active&#39;</span><span class="p">)</span>
+    <span class="n">is_superuser</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Is Superuser&#39;</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntEnumField</span><span class="p">(</span><span class="n">Status</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;User Status&#39;</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DatetimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">updated_at</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DatetimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Permission</span><span class="p">(</span><span class="n">AbstractPermission</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    must inheritance AbstractPermission</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">Role</span><span class="p">(</span><span class="n">AbstractRole</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    must inheritance AbstractRole</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">AdminLog</span><span class="p">(</span><span class="n">AbstractAdminLog</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    must inheritance AbstractAdminLog</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<p>And set <code>permission=True</code> to active it:</p>
+<div class="highlight"><pre><span></span><code><span class="k">await</span> <span class="n">admin_app</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="o">...</span>
+    <span class="n">permission</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">site</span><span class="o">=</span><span class="n">Site</span><span class="p">(</span>
+        <span class="o">...</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>And createsuperuser:</p>
+<div class="highlight"><pre><span></span><code>&gt; fastapi-admin -h
+usage: fastapi-admin <span class="o">[</span>-h<span class="o">]</span> -c CONFIG <span class="o">[</span>--version<span class="o">]</span> <span class="o">{</span>createsuperuser<span class="o">}</span> ...
+
+optional arguments:
+  -h, --help            show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  -c CONFIG, --config CONFIG
+                        Tortoise-orm config dict import path,like settings.TORTOISE_ORM.
+  --version, -V         show the version
+
+subcommands:
+  <span class="o">{</span>createsuperuser<span class="o">}</span>
+</code></pre></div>
+<p>Before you use this command - remember that you have to define your own user model that inherits from fastapi-admin <code>AbstractUser</code>.
+eg.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">fastapi_admin.models</span> <span class="kn">import</span> <span class="n">AbstractUser</span>
+<span class="kn">from</span> <span class="nn">tortoise</span> <span class="kn">import</span> <span class="n">fields</span>
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">AbstractUser</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">BigIntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Here's an example of how createsuperuser command can look like: </p>
+<p><div class="highlight"><pre><span></span><code>fastapi-admin -c <span class="s2">&quot;db.DB_CONFIG&quot;</span> createsuperuser -u User
+</code></pre></div>
+The code above assumes that in your module's dir you have an <code>db.py</code> file in which there's, or that you provide a correct path on your own.
+<code>-c</code> flag proceeds the path to your database config dict. It can look something like this.</p>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># db.py file</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">DB_CONFIG</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;connections&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;engine&quot;</span><span class="p">:</span> <span class="s2">&quot;tortoise.backends.asyncpg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;credentials&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DB_HOST&quot;</span><span class="p">,</span> <span class="s2">&quot;localhost&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DB_PORT&quot;</span><span class="p">,</span> <span class="mi">5432</span><span class="p">),</span>
+                <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DB_USER&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DB_PASSWORD&quot;</span><span class="p">,</span> <span class="s2">&quot;secret_pass&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;database&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DB_DATABASE_NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;db&quot;</span><span class="p">),</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+        <span class="c1"># alternatively, probably only for testing purposes</span>
+        <span class="c1"># &quot;default&quot;: &quot;sqlite://db.sqlite3&quot;,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;apps&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;models&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;models&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;app.db_models&quot;</span><span class="p">]}},</span>
+<span class="p">}</span>
+</code></pre></div>
+<a href="https://tortoise-orm.readthedocs.io/en/latest/setup.html?highlight=config#tortoise.Tortoise.init">Read more about configs and initialization in tortoise orm</a></p>
+<p>After <code>-u</code> you can tell fastapi-admin which model inherits from AdminUser.</p>
+<h2 id="custom-login">Custom Login</h2>
+<p>You can write your own login view logic:</p>
+<div class="highlight"><pre><span></span><code><span class="k">await</span> <span class="n">admin_app</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="o">...</span><span class="p">,</span>
+    <span class="n">login_view</span><span class="o">=</span><span class="s2">&quot;examples.routes.login&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>And must return json like:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;is_superuser&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;avatar&quot;</span><span class="p">:</span> <span class="s2">&quot;https://avatars2.githubusercontent.com/u/13377178?s=460&amp;u=d150d522579f41a52a0b3dd8ea997e0161313b6e&amp;v=4&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;token&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.HSlcYkOEQewxyPuaqcVwCcw_wkbLB50Ws1-ZxfPoLAQ&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="enum-support">Enum Support</h2>
+<p>When you define a enum field of tortoise-orm,like <code>IntEnumField</code>,you can
+inherit <code>fastapi_admin.enums.EnumMixin</code> and impl <code>choices()</code> method,
+FastAPI-Admin will auto read and display and render a <code>select</code> widget in
+front.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Status</span><span class="p">(</span><span class="n">EnumMixin</span><span class="p">,</span> <span class="n">IntEnum</span><span class="p">):</span>
+    <span class="n">on</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">off</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">choices</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">on</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">off</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span>
+        <span class="p">}</span>
+</code></pre></div>
+<h2 id="help-text">Help Text</h2>
+<p>FastAPI-Admin will auto read <code>description</code> defined in tortoise-orm model
+<code>Field</code> and display in front with form help text.</p>
+<h2 id="foreignkeyfield-support">ForeignKeyField Support</h2>
+<p>If <code>ForeignKeyField</code> is not passed in <code>menu.raw_id_fields</code>,FastAPI-Admin
+will get all related objects and display <code>select</code> in front with
+<code>Model.__str__</code>.</p>
+<h2 id="manytomanyfield-support">ManyToManyField Support</h2>
+<p>FastAPI-Admin will render <code>ManyToManyField</code> with multiple <code>select</code> in
+<code>form</code> edit with <code>Model.__str__</code>.</p>
+<h2 id="jsonfield-render">JSONField Render</h2>
+<p>FastAPI-Admin will render <code>JSONField</code> with <code>jsoneditor</code> as beauty
+interface.</p>
+<h2 id="search-fields">Search Fields</h2>
+<p>Defined <code>menu.search_fields</code> in <code>menu</code> will render a search form by
+fields.</p>
+<h2 id="xlsx-export">Xlsx Export</h2>
+<p>FastAPI-Admin can export searched data to excel file when define
+<code>export=True</code> in <code>menu</code>.</p>
+<h2 id="bulk-actions">Bulk Actions</h2>
+<p>Current FastAPI-Admin supports builtin bulk action <code>delete_all</code>,if you
+want to write your own bulk actions:</p>
+<ol>
+<li>pass <code>bulk_actions</code> in <code>Menu</code>,example:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="n">Menu</span><span class="p">(</span>
+    <span class="o">...</span>
+    <span class="n">bulk_actions</span><span class="o">=</span><span class="p">[{</span>
+        <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="c1"># this is fastapi router path param.</span>
+        <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;delete_all&#39;</span><span class="p">,</span> <span class="c1"># this will show in front.</span>
+    <span class="p">}]</span>
+<span class="p">)</span>
+</code></pre></div>
+<ol>
+<li>write fastapi route,example:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">fastapi_admin.schemas</span> <span class="kn">import</span> <span class="n">BulkIn</span>
+<span class="kn">from</span> <span class="nn">fastapi_admin.factory</span> <span class="kn">import</span> <span class="n">app</span> <span class="k">as</span> <span class="n">admin_app</span>
+
+<span class="nd">@admin_app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s1">&#39;/rest/</span><span class="si">{resource}</span><span class="s1">/bulk/delete&#39;</span> <span class="c1"># `delete` is defined in Menu before.</span>
+<span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">bulk_delete</span><span class="p">(</span>
+        <span class="n">bulk_in</span><span class="p">:</span> <span class="n">BulkIn</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">Depends</span><span class="p">(</span><span class="n">get_model</span><span class="p">)</span>
+<span class="p">):</span>
+    <span class="k">await</span> <span class="n">model</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">bulk_in</span><span class="o">.</span><span class="n">pk_list</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+</code></pre></div>
+<h2 id="default-menus">Default Menus</h2>
+<p>Default, FastAPI-Admin provide default menus by your models, without
+doing tedious works. Therefore you do not need to fill the optional argument <code>menus</code> in Site definition.</p>
+<h2 id="custom-menus">Custom Menus</h2>
+<p>You can define a custom menu that'll be used by fastapi-admin. Here's an example of how that might look.</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">menus</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Menu</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Home&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-home&quot;</span><span class="p">),</span>
+    <span class="n">Menu</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Content&quot;</span><span class="p">,</span>
+        <span class="n">children</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">Menu</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Category&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/rest/Category&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-list&quot;</span><span class="p">,</span> <span class="n">search_fields</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;slug&quot;</span><span class="p">,)),</span>
+            <span class="n">Menu</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Config&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/rest/Config&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-gear&quot;</span><span class="p">,</span> <span class="n">import_</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">search_fields</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,)),</span>
+            <span class="n">Menu</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Product&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/rest/Product&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-table&quot;</span><span class="p">,</span> <span class="n">search_fields</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,)),</span>
+        <span class="p">],</span>
+    <span class="p">),</span>
+    <span class="n">Menu</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;External&quot;</span><span class="p">,</span>
+        <span class="n">children</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">Menu</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Github&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://github.com/long2ice/fastapi-admin&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-github&quot;</span><span class="p">,</span> <span class="n">external</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">),</span>
+    <span class="n">Menu</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Auth&quot;</span><span class="p">,</span>
+        <span class="n">children</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">Menu</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;User&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/rest/User&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-user&quot;</span><span class="p">,</span> <span class="n">search_fields</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,),),</span>
+            <span class="n">Menu</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Role&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/rest/Role&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-group&quot;</span><span class="p">,</span> <span class="p">),</span>
+            <span class="n">Menu</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Permission&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/rest/Permission&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-user-plus&quot;</span><span class="p">,</span> <span class="p">),</span>
+            <span class="n">Menu</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Logout&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/logout&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-lock&quot;</span><span class="p">,</span> <span class="p">),</span>
+            <span class="n">Menu</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;AdminLog&quot;</span><span class="p">,</span>
+                <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/rest/AdminLog&quot;</span><span class="p">,</span>
+                <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-align-left&quot;</span><span class="p">,</span>
+                <span class="n">search_fields</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;action&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div>
+Each menu can either be a single element menu that'll only link to a given resource, or it can be a gathering of multiple links, that you add by using the <code>children</code> optional argument.</p>
+<p><code>children</code> should be a list of <code>Menu</code> objects.</p>
+<p>Now that you have your menus you can use them during the app initialization.</p>
+<div class="highlight"><pre><span></span><code><span class="n">menus</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># look at the code above. You can define it here or in separate file to make things neat</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">on_event</span><span class="p">(</span><span class="s2">&quot;startup&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">start_up</span><span class="p">():</span>
+    <span class="k">await</span> <span class="n">admin_app</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>  <span class="c1"># nosec</span>
+        <span class="n">admin_secret</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
+        <span class="n">permission</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">admin_log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">site</span><span class="o">=</span><span class="n">Site</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;FastAPI-Admin DEMO&quot;</span><span class="p">,</span>
+            <span class="n">login_footer</span><span class="o">=</span><span class="s2">&quot;FASweTAPI ADMIN - FastAPI Admin Dashboard&quot;</span><span class="p">,</span>
+            <span class="n">login_description</span><span class="o">=</span><span class="s2">&quot;FastAPI Admin Dashboard&quot;</span><span class="p">,</span>
+            <span class="n">locale</span><span class="o">=</span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
+            <span class="n">locale_switcher</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">theme_switcher</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">menus</span><span class="o">=</span><span class="n">menus</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+</code></pre></div>
+<h2 id="table-variant">Table Variant</h2>
+<p>You can define <code>RowVariant</code> and <code>CellVariants</code> in <code>computed</code> of <code>tortoise-orm</code>, which will effect table rows and cells variant.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">AbstractUser</span><span class="p">):</span>
+    <span class="n">last_login</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DatetimeField</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Last Login&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+    <span class="n">avatar</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">intro</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DatetimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="si">}</span><span class="s2">#</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="nf">rowVariant</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;warning&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">cellVariants</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;intro&quot;</span><span class="p">:</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="k">class</span> <span class="nc">PydanticMeta</span><span class="p">:</span>
+        <span class="n">computed</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;rowVariant&quot;</span><span class="p">,</span> <span class="s2">&quot;cellVariants&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="admin-log">Admin log</h2>
+<p>You can log each admin action like <code>delete</code>,<code>create</code> and <code>update</code>,just set <code>admin_log=True</code> in <code>admin_app.init()</code> and just create a model in your app that inherits from <code>fastapi_admin.models.AbstractAdminLog</code>.</p>
+<h2 id="import-from-excel">Import from excel</h2>
+<p>You can enable <code>import</code> by set <code>import_=True</code> in <code>Menu</code> definition, and data format must same as <code>Model</code> fields.</p>
+<h2 id="custom-filters">Custom filters</h2>
+<p>There are two kinds of filters named <code>Filter</code> and <code>SearchFilter</code>.</p>
+<p><code>Filter</code> use to filter view list default, and <code>SearchFilter</code> add a custom search input in front.</p>
+<p>To use <code>Filter</code> you should only inherit <code>fastapi_admin.filters.Filter</code> then implement <code>get_queryset</code>, for example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">fastapi_admin.filters</span> <span class="kn">import</span> <span class="n">Filter</span>
+
+<span class="k">class</span> <span class="nc">CustomFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">queryset</span><span class="p">:</span> <span class="n">QuerySet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuerySet</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="o">~</span><span class="n">Q</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p>Then add it to <code>Menu.custom_filters</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Menu</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Config&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/rest/Config&quot;</span><span class="p">,</span>
+    <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;fa fa-gear&quot;</span><span class="p">,</span>
+    <span class="n">import_</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">search_fields</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,),</span>
+    <span class="n">custom_filters</span><span class="o">=</span><span class="p">[</span><span class="n">CustomFilter</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>And to use <code>SearchFilter</code>, like <code>Filter</code> but inherit <code>fastapi_admin.filters.SearchFilter</code>, note that you show register it by <code>register_filter</code>, for example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">fastapi_admin.filters</span> <span class="kn">import</span> <span class="n">SearchFilter</span><span class="p">,</span> <span class="n">register_filter</span>
+<span class="kn">from</span> <span class="nn">fastapi_admin.site</span> <span class="kn">import</span> <span class="n">Field</span>
+
+<span class="nd">@register_filter</span>
+<span class="k">class</span> <span class="nc">LikeFilter</span><span class="p">(</span><span class="n">SearchFilter</span><span class="p">):</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">queryset</span><span class="p">:</span> <span class="n">QuerySet</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuerySet</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_field</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Field</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Field</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;NameLike&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;filter&quot;</span>
+</code></pre></div>
+<p><code>get_name</code> must return an unque <code>name</code> for all <code>SearchFilter</code> and <code>get_field</code> should return a <code>Field</code> instance.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../tutorial/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Tutorial
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.53cc9318.min.js"></script>
+      <script src="../assets/javascripts/bundle.e9c9f54f.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
